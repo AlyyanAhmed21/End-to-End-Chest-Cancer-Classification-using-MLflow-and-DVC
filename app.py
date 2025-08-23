@@ -43,9 +43,23 @@ def trainRoute():
 def predictRoute():
     image = request.json['image']
     decodeImage(image, clApp.filename)
-    result = clApp.classifier.predict()
-    return jsonify(result)
+    
+    # This will return a list like [0] or [1]
+    prediction_result = clApp.classifier.predict()
+    
+    # --- ADD THIS LOGIC ---
+    # Get the single value out of the list
+    prediction_value = prediction_result[0]
+    
+    # Translate the numeric prediction into a human-readable string
+    if prediction_value == 1:
+        prediction_text = "Cancer"
+    else:
+        prediction_text = "Normal"
+    # ----------------------
 
+    # Now, return the final text string in the correct JSON structure
+    return jsonify([{"prediction": prediction_text}])
 
 
 if __name__ == "__main__":

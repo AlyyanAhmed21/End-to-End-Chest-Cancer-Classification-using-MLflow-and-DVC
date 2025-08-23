@@ -1,0 +1,116 @@
+/* Using CSS Variables for easy theme changes */
+:root {
+    --primary-color: #007bff;
+    --secondary-color: #6c757d;
+    --background-color: #f8f9fa;
+    --card-bg-color: #ffffff;
+    --font-family: 'Poppins', sans-serif;
+    --success-color: #28a745;
+    --danger-color: #dc3545;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--background-color);
+}
+
+header h1 {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.card {
+    border-radius: 15px;
+    transition: transform 0.2s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card-header {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+.image-upload-wrapper {
+    position: relative;
+    width: 100%;
+    height: 350px;
+    border: 2px dashed var(--primary-color);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background-color: #f0f6ff;
+}
+
+.upload-label {
+    cursor: pointer;
+    text-align: center;
+    color: var(--primary-color);
+}
+
+.upload-label:hover .upload-icon {
+    transform: scale(1.1);
+    color: #0056b3;
+}
+
+.upload-icon {
+    transition: transform 0.2s ease-in-out;
+}
+
+.image-preview-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none; /* Hidden by default */
+}
+
+#imagePreview {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Use contain to see the whole image */
+    padding: 10px;
+}
+
+.remove-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    line-height: 1;
+}
+
+#result-container h3 {
+    font-weight: 600;
+}
+
+.result-normal {
+    color: var(--success-color);
+}
+
+.result-cancer {
+    color: var(--danger-color);
+}
+
+.result-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+}
+
+#jsonResponse {
+    max-height: 200px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    word-break: break-all;
+}
