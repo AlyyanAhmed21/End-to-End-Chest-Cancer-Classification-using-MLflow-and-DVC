@@ -64,17 +64,18 @@ The project follows a structured MLOps workflow, which is fully automated by the
 
 ```mermaid
 graph TD
-    A["Start: Push Code to GitHub"] --> B{"GitHub Actions CI/CD"};
-    B --> C["CI: Install Dependencies & Run Tests"];
-    C -->|Success| D["CD: Deploy to Hugging Face"];
-    D --> E["🚀 Live Application"];
+    A[Start: Push Code to GitHub] --> B{GitHub Actions CI/CD};
+    B --> C[CI: Install Dependencies & Run Tests];
+    C -->|Success| D[CD: Deploy to Hugging Face];
+    D --> E[🚀 Live Application];
 
     subgraph "DVC & MLflow Cycle (Local/Remote)"
-        F["1. `dvc repro`"] --> G["2. Pull Data (DVC)"];
-        G --> H["3. Train Model"];
-        H --> I["4. Log Metrics & Model (MLflow)"];
-        I --> J["5. Push Model (DVC)"];
+        F[1. `dvc repro`] --> G[2. Pull Data (DVC)];
+        G --> H[3. Train Model];
+        H --> I[4. Log Metrics & Model (MLflow)];
+        I --> J[5. Push Model (DVC)];
     end
+```
 
 ## ⚙️ Getting Started - Local Setup
 
