@@ -1,0 +1,2 @@
+*.h5 filter=lfs diff=lfs merge=lfs -text
+artifacts/training/model/variables/variables.data-*-of-* filter=lfs diff=lfs merge=lfs -text
