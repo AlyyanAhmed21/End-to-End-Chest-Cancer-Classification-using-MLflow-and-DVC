@@ -62,7 +62,7 @@ The primary focus is not just on the model's accuracy, but on building a robust,
 
 The project follows a structured MLOps workflow, which is fully automated by the CI/CD pipeline.
 
-```mermaid
+<pre><code class="language-mermaid">
 graph TD
     A[Start: Push Code to GitHub] --> B{GitHub Actions CI/CD};
     B --> C[CI: Install Dependencies & Run Tests];
@@ -75,7 +75,7 @@ graph TD
         H --> I[4. Log Metrics & Model (MLflow)];
         I --> J[5. Push Model (DVC)];
     end
-```
+</code></pre>
 
 ## ⚙️ Getting Started - Local Setup
 
