@@ -26,7 +26,7 @@ pinned: false
 
 Experience the deployed application live on Hugging Face Spaces!
 
-**[➡️ Live Demo Link](https://huggingface.co/spaces/alyyanahmed21/chest-cancer-classifier-app)**
+**[➡️ Live Demo Link](https://huggingface.co/spaces/alyyan/chest-cancer-classifier-app)**
 
 *(Note: The Space may be asleep if it hasn't been used recently. Please allow a moment for it to wake up.)*
 
