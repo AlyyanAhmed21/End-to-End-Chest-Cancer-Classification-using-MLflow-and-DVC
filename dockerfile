@@ -25,5 +25,5 @@ COPY --chown=user ./requirements.txt requirements.txt
 RUN mkdir model
 COPY artifacts/training/best_model.h5 ./model/
 COPY --chown=user . /app
-EXPOSE 8080
+EXPOSE 7860
 CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "7860"]
