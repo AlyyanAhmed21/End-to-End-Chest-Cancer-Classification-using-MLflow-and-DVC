@@ -34,7 +34,7 @@ Experience the deployed application live on Hugging Face Spaces!
 
 Here is the user interface of the deployed web application.
 
-![Application Screenshot](./[screenshot.png](https://huggingface.co/spaces/ALYYAN/chest-cancer-classifier-app))
+![Application Screenshot](./screenshot.png)
 
 ## 📖 About The Project
 
