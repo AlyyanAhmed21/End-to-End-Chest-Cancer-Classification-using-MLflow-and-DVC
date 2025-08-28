@@ -5,32 +5,40 @@ import os
 
 class PredictionPipeline:
     def __init__(self, filename):
+        """
+        Initializes the prediction pipeline.
+
+        This is where we load the model ONCE when the application starts.
+        This is much more efficient than loading it for every prediction.
+        """
         self.filename = filename
+        
+        # --- THIS IS THE FIX ---
+        # The Dockerfile places the model in a 'model' directory.
+        # This is the correct path inside the container.
+        model_path = os.path.join("model", "best_model.h5")
+        self.model = tf.keras.models.load_model(model_path)
+        # ----------------------
 
     def predict(self):
-        # --- FIX #1: LOAD THE CORRECT MODEL ---
-        # Load the BEST model produced by your DVC pipeline.
-        model_path = os.path.join("artifacts", "training", "best_model.h5")
-        model = tf.keras.models.load_model(model_path)
-
-        # --- Load and preprocess the image ---
+        """
+        Performs the prediction on the image file.
+        It uses the model that was already loaded in the constructor.
+        """
+        # Load and preprocess the image
         imagename = self.filename
         test_image = image.load_img(imagename, target_size=(224, 224))
         test_image_array = image.img_to_array(test_image)
         
-        # --- FIX #2: THE CRITICAL RESCALING STEP ---
         # Scale the pixel values to be between 0 and 1, just like the training data.
         scaled_image_array = test_image_array / 255.0
         
         # Add the batch dimension
         input_data = np.expand_dims(scaled_image_array, axis=0)
 
-        # --- Make the prediction on the CORRECTLY preprocessed image ---
-        result_index = np.argmax(model.predict(input_data), axis=1)[0]
-        print(f"Model predicted index: {result_index}")
+        # Make the prediction using the pre-loaded model
+        prediction_probs = self.model.predict(input_data)
+        result_index = np.argmax(prediction_probs, axis=1)
 
-        # --- FIX #3: RETURN THE CORRECT JSON STRUCTURE ---
-        # The logic for translation should be in app.py to keep this pipeline clean,
-        # but for now, we will just return the raw index.
-        # app.py will handle translating 0/1 to "Cancer"/"Normal".
+        # Return the raw index (e.g., [0] or [1])
         return result_index
