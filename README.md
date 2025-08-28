@@ -32,7 +32,7 @@ Experience the deployed application live on Hugging Face Spaces!
 
 ## 🖼️ Application Screenshot
 
-Here is the user interface of the deployed Flask web application.
+Here is the user interface of the deployed web application.
 
 ![Application Screenshot](./screenshot.png)
 
