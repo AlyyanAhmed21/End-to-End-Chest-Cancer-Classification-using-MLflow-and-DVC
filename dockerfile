@@ -1,4 +1,8 @@
 FROM python:3.8-slim
+
+RUN useradd -m -u 1000 user
+USER user
+
 WORKDIR /app
 
 # Copy requirements first for caching
@@ -17,8 +21,9 @@ COPY params.yaml .
 # --- CRITICAL CHANGE ---
 # Create a 'model' directory inside the container and
 # copy ONLY our LFS-tracked model file into it.
+COPY --chown=user ./requirements.txt requirements.txt
 RUN mkdir model
 COPY artifacts/training/best_model.h5 ./model/
-
+COPY --chown=user . /app
 EXPOSE 8080
 CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8080"]
