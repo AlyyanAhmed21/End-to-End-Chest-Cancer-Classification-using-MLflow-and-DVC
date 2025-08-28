@@ -26,4 +26,4 @@ RUN mkdir model
 COPY artifacts/training/best_model.h5 ./model/
 COPY --chown=user . /app
 EXPOSE 8080
-CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8080"]
+CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "7860"]
