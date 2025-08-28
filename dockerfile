@@ -15,6 +15,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY app.py .
 COPY static ./static
 COPY templates ./templates
+COPY src/ . 
 # We need the model, which should be tracked by Git LFS.
 # Create a model directory in the container and copy the model into it.
 RUN mkdir model

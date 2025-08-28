@@ -6,7 +6,11 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-import uvicorn # For running the app directly if needed
+import uvicorn 
+import sys # <-- Add this import
+from pathlib import Path # <-- Add this import
+
+sys.path.append(str(Path(__file__).parent / "src"))
 
 # Your existing ML components
 from cnnClassifier.utils.common import decodeImage
