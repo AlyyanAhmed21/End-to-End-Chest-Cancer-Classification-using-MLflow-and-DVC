@@ -1,29 +1,27 @@
+# 1. Use a standard Python base image
 FROM python:3.8-slim
 
-RUN useradd -m -u 1000 user
-USER user
-
+# 2. Set the working directory
 WORKDIR /app
 
-# Copy requirements first for caching
+# 3. Copy ONLY the requirements file to leverage caching
 COPY requirements.txt .
+
+# 4. Install the dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy all the essential application source code
+# 5. Selectively copy ONLY the files needed for the APP to RUN.
+# We do NOT copy the whole project.
 COPY app.py .
-COPY src ./src
-COPY templates ./templates
 COPY static ./static
-COPY config ./config
-COPY params.yaml .
-# ... copy any other essential source files
-
-# --- CRITICAL CHANGE ---
-# Create a 'model' directory inside the container and
-# copy ONLY our LFS-tracked model file into it.
-COPY --chown=user ./requirements.txt requirements.txt
+COPY templates ./templates
+# We need the model, which should be tracked by Git LFS.
+# Create a model directory in the container and copy the model into it.
 RUN mkdir model
 COPY artifacts/training/best_model.h5 ./model/
-COPY --chown=user . /app
+
+# 6. Expose the port the app runs on
 EXPOSE 7860
+
+# 7. The command to start the production server
 CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "7860"]
